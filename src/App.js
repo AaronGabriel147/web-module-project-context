@@ -7,8 +7,10 @@ import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 
+
 function App() {
 	const [products] = useState(data);
+    console.log("🚀 ~ file: App.js ~ line 13 ~ App ~ data", data)
 	const [cart, setCart] = useState([]);
 
 	const addItem = item => {
