@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { StateContext } from '../context/StateContext';
 
-const Product = props => {
+
+const Product = () => {
+
+	const { cart, setCart, products, setProducts } = useContext(StateContext);
+    console.log("🚀 ~ file: Products.js ~ line 11 ~ Products ~ products", products)
+
 	return (
 		<div className="product">
-			<img src={props.product.image} alt={`${props.product.title} book`} />
+			<img src={products.image} alt={`${products.title} book`} />
 
-			<h1 className="title">{props.product.title}</h1>
+			<h1 className="title">{products.title}</h1>
 
-			<p className="price">${props.product.price}</p>
+			<p className="price">${products.price}</p>
 
-			<button onClick={() => props.addItem(props.product)}>
+			<button onClick={() => addItem(products)}>
 				Add to cart
 			</button>
 		</div>
