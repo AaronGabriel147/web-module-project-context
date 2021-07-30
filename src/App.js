@@ -1,3 +1,5 @@
+// ctrl / alt/ l = turbo console
+
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import data from './data';
@@ -7,28 +9,33 @@ import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
 
+// contextAPI
+import { StateContext } from './contexts/StateContext';
 
 function App() {
-	const [products] = useState(data);
-    console.log("🚀 ~ file: App.js ~ line 13 ~ App ~ data", data)
+	const [products, setProducts] = useState(data);
 	const [cart, setCart] = useState([]);
 
 	const addItem = item => {
-		// add the given item to the cart
+		setCart([...cart, item])
 	};
 
+
+	// DO NOT FORGET DOUBLE CURL IN THE: Provider value={{}}
 	return (
-		<div className="App">
-			<Navigation cart={cart} />
+		<div className=".App">  
+			<StateContext.Provider value={{cart, setCart, products, setProducts, addItem}}>
+				<Navigation cart={cart} />
 
-			{/* Routes */}
-			<Route exact path="/">
-				<Products products={products} addItem={addItem} />
-			</Route>
+				<Route exact path="/">
+					<Products  />
+				</Route>
 
-			<Route path="/cart">
-				<ShoppingCart cart={cart} />
-			</Route>
+				<Route path="/cart">
+					<ShoppingCart cart={cart} />
+				</Route>
+
+			</StateContext.Provider>
 		</div>
 	);
 }
