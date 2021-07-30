@@ -5,8 +5,8 @@ import Product from './Product';
 
 
 const Products = () => {
-	
-	const { addItem, products, } = useContext(StateContext);
+
+	const { addItem, products } = useContext(StateContext);
     console.log("🚀 ~ file: Products.js ~ line 11 ~ Products ~ products", products)
 	// (4) [{…}, {…}, {…}, {…}]
 	// 0:

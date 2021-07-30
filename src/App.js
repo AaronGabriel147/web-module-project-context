@@ -11,6 +11,7 @@ import ShoppingCart from './components/ShoppingCart';
 
 // contextAPI
 import { StateContext } from './contexts/StateContext';
+import { CartContext } from './contexts/CartContext';
 
 function App() {
 	const [products, setProducts] = useState(data);
@@ -20,21 +21,22 @@ function App() {
 		setCart([...cart, item])
 	};
 
-
-	// DO NOT FORGET DOUBLE CURL IN THE: Provider value={{}}
 	return (
 		<div className=".App">  
-			<StateContext.Provider value={{cart, setCart, products, setProducts, addItem}}>
-				<Navigation cart={cart} />
+			<StateContext.Provider value={{ products, addItem }}>
+				<CartContext.Provider value={{ cart }} >
 
-				<Route exact path="/">
-					<Products  />
-				</Route>
+					<Navigation />
 
-				<Route path="/cart">
-					<ShoppingCart cart={cart} />
-				</Route>
+					<Route exact path="/">
+						<Products  />
+					</Route>
 
+					<Route path="/cart">
+						<ShoppingCart />
+					</Route>
+
+				</CartContext.Provider>
 			</StateContext.Provider>
 		</div>
 	);
